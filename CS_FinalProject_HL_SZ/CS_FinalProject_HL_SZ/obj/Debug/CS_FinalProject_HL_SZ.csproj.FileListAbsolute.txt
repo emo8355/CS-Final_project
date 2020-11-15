@@ -1,0 +1,12 @@
+C:\Users\Homer\source\repos\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\bin\Debug\CS_FinalProject_HL_SZ.exe.config
+C:\Users\Homer\source\repos\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\bin\Debug\CS_FinalProject_HL_SZ.exe
+C:\Users\Homer\source\repos\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\bin\Debug\CS_FinalProject_HL_SZ.pdb
+C:\Users\Homer\source\repos\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\obj\Debug\CS_FinalProject_HL_SZ.csprojAssemblyReference.cache
+C:\Users\Homer\source\repos\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\obj\Debug\CS_FinalProject_HL_SZ.Form1.resources
+C:\Users\Homer\source\repos\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\obj\Debug\CS_FinalProject_HL_SZ.Properties.Resources.resources
+C:\Users\Homer\source\repos\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\obj\Debug\CS_FinalProject_HL_SZ.csproj.GenerateResource.cache
+C:\Users\Homer\source\repos\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\obj\Debug\CS_FinalProject_HL_SZ.csproj.CoreCompileInputs.cache
+C:\Users\Homer\source\repos\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\obj\Debug\CS_FinalProject_HL_SZ.exe
+C:\Users\Homer\source\repos\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\obj\Debug\CS_FinalProject_HL_SZ.pdb
+C:\Users\Homer\source\repos\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\bin\Debug\Net.Code.ADONet.dll
+C:\Users\Homer\source\repos\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\obj\Debug\CS_FinalProject_HL_SZ.csproj.CopyComplete
