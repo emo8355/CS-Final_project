@@ -13,10 +13,11 @@ using System.Windows.Forms;
 
 namespace CS_FinalProject_HL_SZ
 {
-    public partial class Form1 : Form
+    public partial class login : Form
     {
         Database library = new Database();
-        public Form1()
+
+        public login()
         {
             InitializeComponent();
         }
@@ -39,6 +40,19 @@ namespace CS_FinalProject_HL_SZ
 
             string str = $"key: {dataArray[0].Key} value: {dataArray[0].Value}";
             MessageBox.Show(str);
+        }
+
+        private void loginButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Global.detailScreen.Show();
+            //library.ConfirmConnect();
+        }
+
+        private void signUpButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Global.signUpScreen.Show();
         }
     }
 }

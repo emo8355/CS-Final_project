@@ -14,7 +14,7 @@ namespace CS_FinalProject_HL_SZ
 {
 	public class Database
 	{
-		static private readonly string connectionString = "Server=tcp:szbcitcshl.database.windows.net,1433;Initial Catalog=library;Persist Security Info=False;User ID=adp001;Password=Admin001;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+		static private readonly string connectionString = "Server=tcp:bcitszhl.database.windows.net,1433;Initial Catalog=library;Persist Security Info=False;User ID=Adp001;Password=Admin001;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 		private SqlConnection cnn = new SqlConnection(connectionString);
 		private SqlCommand command;
 		private SqlDataAdapter insert = new SqlDataAdapter();
