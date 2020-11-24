@@ -10,17 +10,11 @@ using System.Windows.Forms;
 
 namespace CS_FinalProject_HL_SZ
 {
-    public partial class user : Form
+    public partial class LendBooks : Form
     {
-        public user()
+        public LendBooks()
         {
             InitializeComponent();
-        }
-
-        private void Logout_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            Global.loginScreen.Show();
         }
     }
 }

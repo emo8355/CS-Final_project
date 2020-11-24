@@ -8,9 +8,12 @@ namespace CS_FinalProject_HL_SZ
 {
     class Global
     {
-        public static login loginScreen = new login();
+        public static Login loginScreen = new Login();
         public static SignUp signUpScreen = new SignUp();
-        public static detail detailScreen = new detail();
-        public static user userScreen = new user();
+        public static Control controlScreen = new Control();
+        public static Category categoryScreen = new Category();
+        public static Authors authorsScreen = new Authors();
+        public static Books bookScreen = new Books();
+        public static Database database = new Database();
     }
 }

@@ -13,43 +13,51 @@ using System.Windows.Forms;
 
 namespace CS_FinalProject_HL_SZ
 {
-    public partial class login : Form
+    public partial class Login : Form
     {
-        Database library = new Database();
+        string email = string.Empty;
+        string password = string.Empty;
 
-        public login()
+        public Login()
         {
             InitializeComponent();
         }
 
-        private void connect_Click(object sender, EventArgs e)
+        private void Connect_Click(object sender, EventArgs e)
         {
-            library.ConfirmConnect();
+            Global.database.ConfirmConnect();
         }
 
-        private void write_Click(object sender, EventArgs e)
+        private void Write_Click(object sender, EventArgs e)
         {
-            library.testWrite();
+            Global.database.testWrite();
         }
 
-        private void read_Click(object sender, EventArgs e)
+        private void Read_Click(object sender, EventArgs e)
         {
-            ListDictionary data =  library.testRead();
-            DictionaryEntry[] dataArray = new DictionaryEntry[data.Count];
-            data.CopyTo(dataArray, 0);
 
-            string str = $"key: {dataArray[0].Key} value: {dataArray[0].Value}";
-            MessageBox.Show(str);
         }
 
-        private void loginButton_Click(object sender, EventArgs e)
+        private void LoginButton_Click(object sender, EventArgs e)
         {
+            //this.email = emailInput.Text;
+            //this.password = passwordInput.Text;
+            //bool isCorrect = Global.database.LoginUser(email, password);
+            //if (email != "" && password != "" && isCorrect)
+            //{
+            //    this.Hide();
+            //    Global.controlScreen.Show();
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Invalid Email or Password, try again");
+            //}
             this.Hide();
-            Global.detailScreen.Show();
-            //library.ConfirmConnect();
+            Global.controlScreen.Show();
+
         }
 
-        private void signUpButton_Click(object sender, EventArgs e)
+        private void SignUpButton_Click(object sender, EventArgs e)
         {
             this.Hide();
             Global.signUpScreen.Show();

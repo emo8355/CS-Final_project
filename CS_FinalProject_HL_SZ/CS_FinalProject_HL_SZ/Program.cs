@@ -16,7 +16,7 @@ namespace CS_FinalProject_HL_SZ
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new login());
+            Application.Run(new Login());
         }
     }
 }
