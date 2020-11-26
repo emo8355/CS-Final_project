@@ -8,6 +8,7 @@ namespace CS_FinalProject_HL_SZ
 {
     class Global
     {
+        public static Database database = new Database();
         public static Login loginScreen = new Login();
         public static SignUp signUpScreen = new SignUp();
         public static Control controlScreen = new Control();
@@ -16,6 +17,5 @@ namespace CS_FinalProject_HL_SZ
         public static Books bookScreen = new Books();
         public static LendBooks lendBookScreen = new LendBooks();
         public static ReturnBooks returnBookScreen = new ReturnBooks();
-        public static Database database = new Database();
     }
 }

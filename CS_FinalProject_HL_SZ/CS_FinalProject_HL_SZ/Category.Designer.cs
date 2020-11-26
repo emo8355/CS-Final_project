@@ -34,11 +34,11 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.categoryId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.categoryName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button1 = new System.Windows.Forms.Button();
+            this.category_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EditCategory = new System.Windows.Forms.DataGridViewButtonColumn();
             this.DeteleCategory = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.button1 = new System.Windows.Forms.Button();
             this.categoryBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -104,8 +104,8 @@
             this.dataGridView1.AllowUserToOrderColumns = true;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.categoryId,
-            this.categoryName,
+            this.category_id,
+            this.name,
             this.EditCategory,
             this.DeteleCategory});
             this.dataGridView1.Location = new System.Drawing.Point(567, 185);
@@ -116,19 +116,31 @@
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // categoryId
+            // button1
             // 
-            this.categoryId.HeaderText = "id";
-            this.categoryId.MinimumWidth = 8;
-            this.categoryId.Name = "categoryId";
-            this.categoryId.Width = 150;
+            this.button1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.button1.Font = new System.Drawing.Font("Verdana", 13.875F);
+            this.button1.Location = new System.Drawing.Point(428, 593);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(209, 65);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Back";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // categoryName
+            // category_id
             // 
-            this.categoryName.HeaderText = "Category";
-            this.categoryName.MinimumWidth = 8;
-            this.categoryName.Name = "categoryName";
-            this.categoryName.Width = 150;
+            this.category_id.HeaderText = "id";
+            this.category_id.MinimumWidth = 8;
+            this.category_id.Name = "category_id";
+            this.category_id.Width = 150;
+            // 
+            // name
+            // 
+            this.name.HeaderText = "Category";
+            this.name.MinimumWidth = 8;
+            this.name.Name = "name";
+            this.name.Width = 150;
             // 
             // EditCategory
             // 
@@ -151,18 +163,6 @@
             this.DeteleCategory.Text = "Delete";
             this.DeteleCategory.UseColumnTextForButtonValue = true;
             this.DeteleCategory.Width = 150;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.button1.Font = new System.Drawing.Font("Verdana", 13.875F);
-            this.button1.Location = new System.Drawing.Point(428, 593);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(209, 65);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Back";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Category
             // 
@@ -193,8 +193,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button AddCategory;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn categoryId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn categoryName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn category_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewButtonColumn EditCategory;
         private System.Windows.Forms.DataGridViewButtonColumn DeteleCategory;
     }

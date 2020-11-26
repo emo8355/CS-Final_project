@@ -7,13 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
 
 namespace CS_FinalProject_HL_SZ
 {
     public partial class Authors : Form
     {
-        string connString = "Server=tcp:bcitszhl.database.windows.net,1433;Initial Catalog=library;Persist Security Info=False;User ID=Adp001;Password=Admin001;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         private bool mode = false;
         private int id;
         public Authors()
@@ -25,25 +23,13 @@ namespace CS_FinalProject_HL_SZ
 
         private void load()
         {
-            string query = $"select * from author";
             dataGridView1.Rows.Clear();
-            SqlConnection conn = new SqlConnection(connString);
-            SqlCommand cmd = new SqlCommand(query, conn);
-            conn.Open();
-            SqlDataReader dr = cmd.ExecuteReader();
-            while (dr.Read())
+            string query = $"select * from author";
+            DataTable dt = Global.database.PopulateDataViewGrid(query);
+            foreach (DataRow r in dt.Rows)
             {
-                dataGridView1.Rows.Add(dr[0], dr[1], dr[2]);
+                dataGridView1.Rows.Add(r[0], r[1], r[2]);
             }
-
-            conn.Close();
-        }
-
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            Global.controlScreen.Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -51,10 +37,18 @@ namespace CS_FinalProject_HL_SZ
             string firstname = fn.Text;
             string lastname = ln.Text;
 
-            if(mode)
-                Global.database.UpdateAuthor(firstname, lastname, id);
+            if(firstname != "" && lastname != "")
+            {
+                if (mode)
+                    Global.database.UpdateAuthor(firstname, lastname, id);
+                else
+                    Global.database.CreateAuthor(firstname, lastname);
+            }
             else
-                Global.database.CreateAuthor(firstname, lastname);
+            {
+                MessageBox.Show("Field can not be empty");
+            }
+            
             mode = false;
             fn.Clear();
             ln.Clear();
@@ -68,17 +62,12 @@ namespace CS_FinalProject_HL_SZ
                 id = Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value);
                 mode = true;
                 string query = $"SELECT * FROM author WHERE author_id = {id}";
-                SqlConnection conn = new SqlConnection(connString);
-                SqlCommand cmd = new SqlCommand(query, conn);
-                conn.Open();
-                SqlDataReader dr = cmd.ExecuteReader();
-                while (dr.Read())
+                DataTable dt = Global.database.PopulateDataViewGrid(query);
+                foreach (DataRow r in dt.Rows)
                 {
-                    fn.Text = dr[1].ToString();
-                    ln.Text = dr[2].ToString();
+                    fn.Text = r[1].ToString();
+                    ln.Text = r[2].ToString();
                 }
-
-                conn.Close();
 
             }
             else if (e.ColumnIndex == dataGridView1.Columns["Detele"].Index && e.RowIndex >= 0)
@@ -87,6 +76,12 @@ namespace CS_FinalProject_HL_SZ
                 Global.database.RemoveColumnById("author", "author_id", id);
                 this.load();
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Global.controlScreen.Show();
         }
     }
 }

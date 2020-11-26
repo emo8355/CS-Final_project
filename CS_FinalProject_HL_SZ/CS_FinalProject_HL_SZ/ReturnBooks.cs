@@ -13,7 +13,6 @@ namespace CS_FinalProject_HL_SZ
 {
     public partial class ReturnBooks : Form
     {
-        private string connString = "Server=tcp:bcitszhl.database.windows.net,1433;Initial Catalog=library;Persist Security Info=False;User ID=Adp001;Password=Admin001;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         public ReturnBooks()
         {
             InitializeComponent();
@@ -22,7 +21,8 @@ namespace CS_FinalProject_HL_SZ
 
         private void load()
         {
-            string str = @"
+            dataGridView1.Rows.Clear();
+            string query = @"
                 select 
                 	books.book_id, 
                 	books.title, 
@@ -35,17 +35,11 @@ namespace CS_FinalProject_HL_SZ
                 	INNER JOIN category ON category.category_id =books.category_id
                 	LEFT JOIN author on author.author_id = books.author_id
                 WHERE books.isBorrowed = 1";
-            dataGridView1.Rows.Clear();
-            SqlConnection con = new SqlConnection(connString);
-            SqlCommand cmd = new SqlCommand(str, con);
-            con.Open();
-            SqlDataReader dr = cmd.ExecuteReader();
-            while (dr.Read())
+            DataTable dt = Global.database.PopulateDataViewGrid(query);
+            foreach (DataRow r in dt.Rows)
             {
-
-                dataGridView1.Rows.Add(dr[0], dr[1], dr[2], dr[3], dr[4], dr[5]);
+                dataGridView1.Rows.Add(r[0], r[1], r[2], r[3], r[4], r[5]);
             }
-            con.Close();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

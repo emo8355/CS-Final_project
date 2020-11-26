@@ -23,21 +23,6 @@ namespace CS_FinalProject_HL_SZ
             InitializeComponent();
         }
 
-        private void Connect_Click(object sender, EventArgs e)
-        {
-            Global.database.ConfirmConnect();
-        }
-
-        private void Write_Click(object sender, EventArgs e)
-        {
-            Global.database.testWrite();
-        }
-
-        private void Read_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void LoginButton_Click(object sender, EventArgs e)
         {
             this.email = emailInput.Text;

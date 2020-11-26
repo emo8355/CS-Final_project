@@ -15,16 +15,15 @@ namespace CS_FinalProject_HL_SZ
 {
     public class Database
     {
-        static private readonly string connectionString = "Server=tcp:bcitszhl.database.windows.net,1433;Initial Catalog=library;Persist Security Info=False;User ID=Adp001;Password=Admin001;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-        private readonly SqlConnection cnn = new SqlConnection(connectionString);
+        private string connectionString;
+        private SqlConnection cnn;
         private SqlCommand command;
         private SqlDataAdapter insert = new SqlDataAdapter();
         private SqlDataReader dataReader;
         public Database()
         {
-            //
-            // TODO: Add constructor logic here
-            //
+           this.connectionString = "Server=tcp:bcitszhl.database.windows.net,1433;Initial Catalog=library;Persist Security Info=False;User ID=Adp001;Password=Admin001;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            cnn = new SqlConnection(connectionString);
         }
 
         public void ConfirmConnect()
@@ -105,6 +104,25 @@ namespace CS_FinalProject_HL_SZ
                 cnn.Close();
             }
             
+        }
+
+        public void UpdateCategory(string category, int id)
+        {
+            try
+            {
+                cnn.Open();
+                string sql = $"UPDATE category SET name = '{category}' WHERE category_id = '{id}' ";
+                command = new SqlCommand(sql, cnn);
+                insert.InsertCommand = new SqlCommand(sql, cnn);
+                insert.InsertCommand.ExecuteNonQuery();
+                command.Dispose();
+                cnn.Close();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+                cnn.Close();
+            }
         }
 
         public void CreateAuthor( string firstname, string lastname)
@@ -203,6 +221,18 @@ namespace CS_FinalProject_HL_SZ
                 MessageBox.Show("something went wrong, try again later");
                 cnn.Close();
             }
+        }
+
+        public DataTable PopulateDataViewGrid(string query)
+        {
+            cnn.Open();
+            string sql = query;
+            command = new SqlCommand(sql, cnn);
+            dataReader = command.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(dataReader);
+            cnn.Close();
+            return dt;
         }
 
         public void RemoveColumnById(string table, string typeID,int id)

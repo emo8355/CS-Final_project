@@ -13,6 +13,8 @@ namespace CS_FinalProject_HL_SZ
 {
     public partial class Category : Form
     {
+        private int id;
+        private bool mode = false;
         public Category()
         {
             InitializeComponent();
@@ -21,20 +23,13 @@ namespace CS_FinalProject_HL_SZ
 
         private void load()
         {
-            string connString = "Server=tcp:bcitszhl.database.windows.net,1433;Initial Catalog=library;Persist Security Info=False;User ID=Adp001;Password=Admin001;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            string query = $"select * from category";
             dataGridView1.Rows.Clear();
-            SqlConnection conn = new SqlConnection(connString);
-            SqlCommand cmd = new SqlCommand(query, conn);
-            conn.Open();
-            SqlDataReader dr = cmd.ExecuteReader();
-            while (dr.Read())
+            string query = "SELECT * FROM category";
+            DataTable dt = Global.database.PopulateDataViewGrid(query);
+            foreach (DataRow r in dt.Rows)
             {
-                dataGridView1.Rows.Add(dr[0], dr[1]);
+                dataGridView1.Rows.Add(r[0], r[1]);
             }
-            
- 
-            conn.Close();
         }
 
         private void AddCategory_Click(object sender, EventArgs e)
@@ -42,28 +37,31 @@ namespace CS_FinalProject_HL_SZ
             string categoryType = textBox1.Text;
             if (categoryType != "")
             {
-                Global.database.CreateCategory(categoryType);
-                textBox1.Clear();
-                this.load();
+                if (mode)
+                    Global.database.UpdateCategory(categoryType, Convert.ToInt32(id));
+                else
+                    Global.database.CreateCategory(categoryType);
             }
             else
             {
                 MessageBox.Show("Field can not be empty");
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            Global.controlScreen.Show();
+            textBox1.Clear();
+            this.load();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if(e.ColumnIndex == dataGridView1.Columns["EditCategory"].Index && e.RowIndex >= 0)
             {
-                string id = dataGridView1.CurrentRow.Cells[0].Value.ToString();
-                string str = textBox1.Text;
+                id = Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value.ToString());
+                string query = $"SELECT * FROM category WHERE category_id = '{id}'";
+                DataTable dt = Global.database.PopulateDataViewGrid(query);
+                foreach (DataRow r in dt.Rows)
+                {
+                    textBox1.Text = r[1].ToString();
+                }
+                mode = true;
             }
             else if (e.ColumnIndex == dataGridView1.Columns["DeteleCategory"].Index && e.RowIndex >= 0)
             {
@@ -71,6 +69,12 @@ namespace CS_FinalProject_HL_SZ
                 Global.database.RemoveColumnById("category", "category_id", id);
                 this.load();
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Global.controlScreen.Show();
         }
     }
 }
