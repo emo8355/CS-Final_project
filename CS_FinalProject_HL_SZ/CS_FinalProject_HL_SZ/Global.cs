@@ -12,7 +12,7 @@ namespace CS_FinalProject_HL_SZ
         public static Login loginScreen = new Login();
         public static SignUp signUpScreen = new SignUp();
         public static Control controlScreen = new Control();
-        public static Category categoryScreen = new Category();
+        public static CategoryScreen categoryScreen = new CategoryScreen();
         public static Authors authorsScreen = new Authors();
         public static Books bookScreen = new Books();
         public static LendBooks lendBookScreen = new LendBooks();

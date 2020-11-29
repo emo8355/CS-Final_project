@@ -33,6 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Net.Code.ADONet, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Net.Code.ADONet.4.0.73\lib\net472\Net.Code.ADONet.dll</HintPath>
     </Reference>
@@ -40,6 +46,8 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,74 +59,103 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Authors.cs">
+    <Compile Include="admin.cs">
+      <DependentUpon>LibraryDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="author.cs">
+      <DependentUpon>LibraryDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BookInfoGetter.cs" />
+    <Compile Include="AuthorInfoGetter.cs" />
+    <Compile Include="model\Authors.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Authors.Designer.cs">
+    <Compile Include="model\Authors.Designer.cs">
       <DependentUpon>Authors.cs</DependentUpon>
     </Compile>
-    <Compile Include="Books.cs">
+    <Compile Include="book.cs">
+      <DependentUpon>LibraryDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="model\Books.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Books.Designer.cs">
+    <Compile Include="model\Books.Designer.cs">
       <DependentUpon>Books.cs</DependentUpon>
     </Compile>
-    <Compile Include="Category.cs">
+    <Compile Include="category.cs">
+      <DependentUpon>LibraryDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="model\CategoryScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Category.Designer.cs">
-      <DependentUpon>Category.cs</DependentUpon>
+    <Compile Include="model\CategoryScreen.Designer.cs">
+      <DependentUpon>CategoryScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Control.cs">
+    <Compile Include="model\Control.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Control.Designer.cs">
+    <Compile Include="model\Control.Designer.cs">
       <DependentUpon>Control.cs</DependentUpon>
     </Compile>
     <Compile Include="database.cs" />
     <Compile Include="Global.cs" />
-    <Compile Include="LendBooks.cs">
+    <Compile Include="model\LendBooks.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LendBooks.Designer.cs">
+    <Compile Include="model\LendBooks.Designer.cs">
       <DependentUpon>LendBooks.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login.cs">
+    <Compile Include="LibraryDbContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LibraryDbContext.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LibraryDbContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LibraryDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LibraryDbContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LibraryDbContext.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="model\Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login.Designer.cs">
+    <Compile Include="model\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReturnBooks.cs">
+    <Compile Include="model\ReturnBooks.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ReturnBooks.Designer.cs">
+    <Compile Include="model\ReturnBooks.Designer.cs">
       <DependentUpon>ReturnBooks.cs</DependentUpon>
     </Compile>
-    <Compile Include="SignUp.cs">
+    <Compile Include="model\SignUp.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SignUp.Designer.cs">
+    <Compile Include="model\SignUp.Designer.cs">
       <DependentUpon>SignUp.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Authors.resx">
+    <EmbeddedResource Include="model\Authors.resx">
       <DependentUpon>Authors.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Books.resx">
+    <EmbeddedResource Include="model\Books.resx">
       <DependentUpon>Books.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Category.resx">
-      <DependentUpon>Category.cs</DependentUpon>
+    <EmbeddedResource Include="model\CategoryScreen.resx">
+      <DependentUpon>CategoryScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Control.resx">
+    <EmbeddedResource Include="model\Control.resx">
       <DependentUpon>Control.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LendBooks.resx">
+    <EmbeddedResource Include="model\LendBooks.resx">
       <DependentUpon>LendBooks.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login.resx">
+    <EmbeddedResource Include="model\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -130,12 +167,19 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ReturnBooks.resx">
+    <EmbeddedResource Include="model\ReturnBooks.resx">
       <DependentUpon>ReturnBooks.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SignUp.resx">
+    <EmbeddedResource Include="model\SignUp.resx">
       <DependentUpon>SignUp.cs</DependentUpon>
     </EmbeddedResource>
+    <EntityDeploy Include="LibraryDbContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LibraryDbContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="LibraryDbContext.edmx.diagram">
+      <DependentUpon>LibraryDbContext.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -149,6 +193,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LibraryDbContext.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LibraryDbContext.Context.cs</LastGenOutput>
+      <DependentUpon>LibraryDbContext.edmx</DependentUpon>
+    </Content>
+    <Content Include="LibraryDbContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LibraryDbContext.edmx</DependentUpon>
+      <LastGenOutput>LibraryDbContext.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

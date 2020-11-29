@@ -23,7 +23,6 @@ C:\Users\Homer\OneDrive\Desktop\CS-Final_project\CS_FinalProject_HL_SZ\CS_FinalP
 C:\Users\Homer\OneDrive\Desktop\CS-Final_project\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\obj\Debug\CS_FinalProject_HL_SZ.exe
 C:\Users\Homer\OneDrive\Desktop\CS-Final_project\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\obj\Debug\CS_FinalProject_HL_SZ.pdb
 C:\Users\Homer\OneDrive\Desktop\CS-Final_project\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\obj\Debug\CS_FinalProject_HL_SZ.SignUp.resources
-C:\Users\Homer\OneDrive\Desktop\CS-Final_project\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\obj\Debug\CS_FinalProject_HL_SZ.Category.resources
 C:\Users\Homer\OneDrive\Desktop\CS-Final_project\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\obj\Debug\CS_FinalProject_HL_SZ.Control.resources
 C:\Users\Homer\OneDrive\Desktop\CS-Final_project\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\obj\Debug\CS_FinalProject_HL_SZ.Authors.resources
 C:\Users\Homer\OneDrive\Desktop\CS-Final_project\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\obj\Debug\CS_FinalProject_HL_SZ.Books.resources
@@ -36,7 +35,6 @@ C:\Users\Homer\OneDrive\Desktop\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\bin\
 C:\Users\Homer\OneDrive\Desktop\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\obj\Debug\CS_FinalProject_HL_SZ.csprojAssemblyReference.cache
 C:\Users\Homer\OneDrive\Desktop\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\obj\Debug\CS_FinalProject_HL_SZ.Authors.resources
 C:\Users\Homer\OneDrive\Desktop\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\obj\Debug\CS_FinalProject_HL_SZ.Books.resources
-C:\Users\Homer\OneDrive\Desktop\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\obj\Debug\CS_FinalProject_HL_SZ.Category.resources
 C:\Users\Homer\OneDrive\Desktop\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\obj\Debug\CS_FinalProject_HL_SZ.Control.resources
 C:\Users\Homer\OneDrive\Desktop\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\obj\Debug\CS_FinalProject_HL_SZ.LendBooks.resources
 C:\Users\Homer\OneDrive\Desktop\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\obj\Debug\CS_FinalProject_HL_SZ.Login.resources
@@ -48,3 +46,13 @@ C:\Users\Homer\OneDrive\Desktop\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\obj\
 C:\Users\Homer\OneDrive\Desktop\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\obj\Debug\CS_FinalProject_HL_SZ.csproj.CopyComplete
 C:\Users\Homer\OneDrive\Desktop\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\obj\Debug\CS_FinalProject_HL_SZ.exe
 C:\Users\Homer\OneDrive\Desktop\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\obj\Debug\CS_FinalProject_HL_SZ.pdb
+C:\Users\Homer\OneDrive\Desktop\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\bin\Debug\EntityFramework.dll
+C:\Users\Homer\OneDrive\Desktop\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Homer\OneDrive\Desktop\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\bin\Debug\EntityFramework.xml
+C:\Users\Homer\OneDrive\Desktop\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Homer\OneDrive\Desktop\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\obj\Debug\CS_FinalProject_HL_SZ.CategoryScreen.resources
+C:\Users\Homer\OneDrive\Desktop\CS-Final_project\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\bin\Debug\EntityFramework.dll
+C:\Users\Homer\OneDrive\Desktop\CS-Final_project\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Homer\OneDrive\Desktop\CS-Final_project\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\bin\Debug\EntityFramework.xml
+C:\Users\Homer\OneDrive\Desktop\CS-Final_project\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Homer\OneDrive\Desktop\CS-Final_project\CS_FinalProject_HL_SZ\CS_FinalProject_HL_SZ\obj\Debug\CS_FinalProject_HL_SZ.CategoryScreen.resources

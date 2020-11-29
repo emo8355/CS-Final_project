@@ -1,74 +1,24 @@
 ﻿using System;
 using System.Linq;
 using System.Data;
-using System.Data.SqlClient;
 using System.Windows.Forms;
-using System.Collections.Specialized;
-using System.Collections;
 using System.Collections.Generic;
-/// <summary>
-/// Summary description for Class1
-/// </summary>
-/// 
+using System.Data.Entity.Infrastructure;
+
 
 namespace CS_FinalProject_HL_SZ
 {
     public class Database
     {
-        private string connectionString;
-        private SqlConnection cnn;
-        private SqlCommand command;
-        private SqlDataAdapter insert = new SqlDataAdapter();
-        private SqlDataReader dataReader;
+        LibraryDbContext context = new LibraryDbContext();
         public Database()
         {
-           this.connectionString = "Server=tcp:bcitszhl.database.windows.net,1433;Initial Catalog=library;Persist Security Info=False;User ID=Adp001;Password=Admin001;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            cnn = new SqlConnection(connectionString);
-        }
-
-        public void ConfirmConnect()
-        {
-            cnn.Open();
-            MessageBox.Show("Connect confirm");
-            cnn.Close();
-        }
-
-        public void testWrite()
-        {
-            cnn.Open();
-            string sql = "Insert into category (name) values ('comic')";
-            command = new SqlCommand(sql, cnn);
-            insert.InsertCommand = new SqlCommand(sql, cnn);
-            insert.InsertCommand.ExecuteNonQuery();
-            MessageBox.Show("data inserted");
-            command.Dispose();
-            cnn.Close();
-        }
-
-        public ListDictionary testRead()
-        {
-            cnn.Open();
-            string sql = "select * from category";
-            command = new SqlCommand(sql, cnn);
-            dataReader = command.ExecuteReader();
-            ListDictionary DataList = new ListDictionary();
-            while (dataReader.Read())
-                DataList.Add(dataReader.GetValue(0), dataReader.GetValue(1));
-            command.Dispose();
-            cnn.Close();
-            return DataList;
         }
 
         public bool LoginUser(string email,string password)
         {
-            cnn.Open();
-            string sql = $"SELECT * FROM admin WHERE email ='{email}' AND password = '{password}' ";
-            command = new SqlCommand(sql, cnn);
-            dataReader = command.ExecuteReader();
-            bool isCorrect = dataReader.Read();
-            command.Dispose();
-            cnn.Close();
-            if (isCorrect)
+            var query = context.admins.Where(admin => admin.email == email).Single();
+            if (password == query.password)
                 return true;
             else
                 return false;
@@ -77,51 +27,51 @@ namespace CS_FinalProject_HL_SZ
 
         public void CreateUser(string firstname, string lastname, string email, string password)
         {
-            cnn.Open();
-            string sql = $"Insert into admin (firstname,lastname,email,password) values ('{firstname}','{lastname}','{email}','{password}')";
-            command = new SqlCommand(sql, cnn);
-            insert.InsertCommand = new SqlCommand(sql, cnn);
-            insert.InsertCommand.ExecuteNonQuery();
-            command.Dispose();
-            cnn.Close();
+            try
+            {
+                admin newAdmin = new admin
+                {
+                    firstname = firstname,
+                    lastname = lastname,
+                    email = email,
+                    password = password
+                };
+                context.admins.Add(newAdmin);
+                context.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                 throw new DbUpdateException("Admin already exist !");
+                
+            }
         }
 
-        public void CreateCategory(string category)
+        public void CreateCategory(string categoryname)
         {
             try
             {
-                cnn.Open();
-                string sql = $"Insert into category (name) values ('{category}') ";
-                command = new SqlCommand(sql, cnn);
-                insert.InsertCommand = new SqlCommand(sql, cnn);
-                insert.InsertCommand.ExecuteNonQuery();
-                command.Dispose();
-                cnn.Close();
+                category newCategory = new category { name = categoryname };
+                context.categories.Add(newCategory);
+                context.SaveChanges();
             }
-            catch(SqlException ex)
+            catch(DbUpdateException ex)
             {
                 MessageBox.Show("Can not duplicate data");
-                cnn.Close();
             }
             
         }
 
-        public void UpdateCategory(string category, int id)
+        public void UpdateCategory(string categoryname, int id)
         {
             try
             {
-                cnn.Open();
-                string sql = $"UPDATE category SET name = '{category}' WHERE category_id = '{id}' ";
-                command = new SqlCommand(sql, cnn);
-                insert.InsertCommand = new SqlCommand(sql, cnn);
-                insert.InsertCommand.ExecuteNonQuery();
-                command.Dispose();
-                cnn.Close();
+                var update = context.categories.Where(category => category.category_id == id).Single();
+                update.name = categoryname;
+                context.SaveChanges();
             }
-            catch (SqlException ex)
+            catch (DbUpdateException ex)
             {
                 MessageBox.Show(ex.Message);
-                cnn.Close();
             }
         }
 
@@ -129,18 +79,13 @@ namespace CS_FinalProject_HL_SZ
         {
             try
             {
-                cnn.Open();
-                string sql = $"Insert into author (firstname, lastname) values ('{firstname}','{lastname}')";
-                command = new SqlCommand(sql, cnn);
-                insert.InsertCommand = new SqlCommand(sql, cnn);
-                insert.InsertCommand.ExecuteNonQuery();
-                command.Dispose();
-                cnn.Close();
+                author newAuthor = new author { firstname = firstname, lastname = lastname };
+                context.authors.Add(newAuthor);
+                context.SaveChanges();
             }
-            catch (SqlException ex)
+            catch (DbUpdateException ex)
             {
                 MessageBox.Show("Can not duplicate data");
-                cnn.Close();
             }
         }
 
@@ -148,103 +93,192 @@ namespace CS_FinalProject_HL_SZ
         {
             try
             {
-                cnn.Open();
-                string sql = $"UPDATE author SET firstname = '{firstname}', lastname = '{lastname}' WHERE author_id = '{id}'";
-                command = new SqlCommand(sql, cnn);
-                insert.InsertCommand = new SqlCommand(sql, cnn);
-                insert.InsertCommand.ExecuteNonQuery();
-                command.Dispose();
-                cnn.Close();
+                var update = context.authors.Where(author => author.author_id == id).Single();
+                update.firstname = firstname;
+                update.lastname = lastname;
+                context.SaveChanges();
             }
-            catch (SqlException ex)
+            catch (DbUpdateException ex)
             {
                 MessageBox.Show("something went wrong, try again later");
-                cnn.Close();
             }
         }
 
-        public void CreateBook(string title, string language, string categoryId, string authorId, DateTime date)
+        public void CreateBook(string title, string language, int categoryId, int authorId, DateTime date)
         {
             try
             {
-                cnn.Open();
-                string sql = $"Insert into books (title, language, category_id, author_id, published_date) values ('{title}','{language}','{categoryId}','{authorId}','{date}')";
-                command = new SqlCommand(sql, cnn);
-                insert.InsertCommand = new SqlCommand(sql, cnn);
-                insert.InsertCommand.ExecuteNonQuery();
-                command.Dispose();
-                cnn.Close();
+                book newBook = new book
+                {
+                    title = title,
+                    language = language,
+                    category_id = categoryId,
+                    author_id = authorId,
+                    published_date = date,
+                    isBorrowed = false
+            };
+                context.books.Add(newBook);
+                context.SaveChanges();
+
             }
-            catch (SqlException ex)
+            catch (DbUpdateException ex)
             {
                 Console.WriteLine(ex);
                 MessageBox.Show("something went wrong, try again later");
-                cnn.Close();
             }
         }
 
-        public void UpdateBook(string title, string language, string categoryId, string authorId, DateTime date, int id )
+        public void UpdateBook(string title, string language, int categoryId, int authorId, DateTime date, int id )
         {
             try
             {
-                cnn.Open();
-                string sql = $"UPDATE books SET title = '{title}', language = '{language}' , category_id = '{categoryId}' , author_id = '{authorId}' , published_date = '{date}' WHERE book_id = '{id}'";
-                command = new SqlCommand(sql, cnn);
-                insert.InsertCommand = new SqlCommand(sql, cnn);
-                insert.InsertCommand.ExecuteNonQuery();
-                command.Dispose();
-                cnn.Close();
+                var update = context.books.Where(book => book.book_id == id).Single();
+                update.title = title;
+                update.language = language;
+                update.category_id = categoryId;
+                update.author_id = authorId;
+                update.published_date = date;
+                context.SaveChanges();
             }
-            catch (SqlException ex)
+            catch (DbUpdateException ex)
             {
-                Console.WriteLine(ex);
                 MessageBox.Show("something went wrong, try again later");
-                cnn.Close();
             }
         }
 
-        public void UpdateBookStatus( int status, string id)
+        public void UpdateBookStatus( bool status, int id)
         {
             try
             {
-                cnn.Open();
-                string sql = $"UPDATE books SET isBorrowed = '{status}'  WHERE book_id = '{id}'";
-                command = new SqlCommand(sql, cnn);
-                insert.InsertCommand = new SqlCommand(sql, cnn);
-                insert.InsertCommand.ExecuteNonQuery();
-                command.Dispose();
-                cnn.Close();
+                var update = context.books.Where(book => book.book_id == id).Single();
+                update.isBorrowed = status;
+                context.SaveChanges();
             }
-            catch (SqlException ex)
+            catch (DbUpdateException ex)
             {
-                Console.WriteLine(ex);
                 MessageBox.Show("something went wrong, try again later");
-                cnn.Close();
             }
         }
 
-        public DataTable PopulateDataViewGrid(string query)
+        public List<book> GetBooks()
         {
-            cnn.Open();
-            string sql = query;
-            command = new SqlCommand(sql, cnn);
-            dataReader = command.ExecuteReader();
-            DataTable dt = new DataTable();
-            dt.Load(dataReader);
-            cnn.Close();
-            return dt;
+            List<book> query = (
+                         from book in context.books
+                         join author in context.authors on book.author_id equals author.author_id
+                         join categories in context.categories on book.category_id equals categories.category_id
+                         select book).ToList();
+            return query;
         }
 
-        public void RemoveColumnById(string table, string typeID,int id)
+        public List<book> GetBooks(int id)
         {
-            cnn.Open();
-            string sql = $"Delete {table} WHERE {typeID} = {id}";
-            command = new SqlCommand(sql, cnn);
-            insert.InsertCommand = new SqlCommand(sql, cnn);
-            insert.InsertCommand.ExecuteNonQuery();
-            command.Dispose();
-            cnn.Close();
+            List<book> query = (
+                         from book in context.books
+                         join author in context.authors on book.author_id equals author.author_id
+                         join categories in context.categories on book.category_id equals categories.category_id
+                         where book.book_id == id
+                         orderby book.book_id
+                         select book).ToList();
+            return query;
+        }
+
+        public List<category> GetCategories()
+        {
+            List<category> query = (from categories in context.categories orderby categories.category_id select categories).ToList();
+            return query;
+        }
+
+        public List<category> GetCategories(int id)
+        {
+            List<category> query = (from categories in context.categories where categories.category_id == id orderby categories.category_id select categories).ToList();
+            return query;
+        }
+
+        public List<AuthorInfoGetter> GetAuthors(bool fullname)
+        {
+            List<AuthorInfoGetter> query;
+            if (fullname)
+                query = context.authors
+                               .ToList()
+                               .Select(author => new AuthorInfoGetter(author.author_id, author.firstname+" "+author.lastname))
+                               .ToList();
+            else
+                query = context.authors
+                               .ToList()
+                               .Select(author => new AuthorInfoGetter(author.author_id, author.firstname, author.lastname))
+                               .ToList();
+            return query;
+        }
+
+        public List<AuthorInfoGetter> GetAuthors(int id)
+        {
+            List<AuthorInfoGetter> query = context.authors
+                                            .Where(author=>author.author_id == id)
+                                            .ToList()
+                                            .Select(author => new AuthorInfoGetter(author.author_id, author.firstname, author.lastname))
+                                            .ToList();
+            return query;
+        }
+
+        public List<BookInfoGetter> GetBookStatus(bool status)
+        {
+            List<BookInfoGetter> query = (from book in context.books
+                                          join author in context.authors on book.author_id equals author.author_id
+                                          join categories in context.categories on book.category_id equals categories.category_id
+                                          where book.isBorrowed == status
+                                          orderby book.book_id
+                                          select new { book = book, bookType = categories.name, authorFullname = author.firstname + " " + author.lastname }
+                                          )
+                                          .ToList()
+                                          .Select(x => new BookInfoGetter(x.book, x.bookType, x.authorFullname))
+                                          .ToList();
+            return query;
+                                         
+        }
+
+        public void RemoveCategory(int id)
+        {
+            try
+            {
+                var query = context.categories.Where(category => category.category_id == id).Single();
+                context.categories.Remove(query);
+                context.SaveChanges();
+            }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show("Can't delete Category, please delete all the boos first");
+            }
+        }
+
+        public void RemoveAuthor(int id)
+        {
+            try
+            {
+                var query = context.authors.Where(author => author.author_id == id).Single();
+                context.authors.Remove(query);
+                context.SaveChanges();
+            }
+            catch(InvalidOperationException ex)
+            {
+                MessageBox.Show("Can't delete Author, please delete the book first");
+            }
+            
+        }
+
+        public void RemoveBook (int id)
+        {
+            try
+            {
+                var query = context.books.Where(book => book.book_id == id).Single();
+                context.books.Remove(query);
+                context.SaveChanges();
+            }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show("Can't delete Book, please delete other relation first");
+            }
         }
 
     }
+
 }

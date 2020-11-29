@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LibraryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="admin">
+    <Key>
+      <PropertyRef Name="admin_id" />
+    </Key>
+    <Property Name="admin_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="firstname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="lastname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="email" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="64" Nullable="false" />
+    <Property Name="phonenumber" Type="char" MaxLength="25" />
+    <Property Name="created_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="author">
+    <Key>
+      <PropertyRef Name="author_id" />
+    </Key>
+    <Property Name="author_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="firstname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="lastname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="created_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="books">
+    <Key>
+      <PropertyRef Name="book_id" />
+    </Key>
+    <Property Name="book_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="nvarchar" MaxLength="180" Nullable="false" />
+    <Property Name="language" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="isBorrowed" Type="bit" />
+    <Property Name="category_id" Type="int" Nullable="false" />
+    <Property Name="author_id" Type="int" Nullable="false" />
+    <Property Name="published_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="category_id" />
+    </Key>
+    <Property Name="category_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__books__author_id__03F0984C">
+    <End Role="author" Type="Self.author" Multiplicity="1" />
+    <End Role="books" Type="Self.books" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="author">
+        <PropertyRef Name="author_id" />
+      </Principal>
+      <Dependent Role="books">
+        <PropertyRef Name="author_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__books__category___02FC7413">
+    <End Role="category" Type="Self.category" Multiplicity="1" />
+    <End Role="books" Type="Self.books" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="category_id" />
+      </Principal>
+      <Dependent Role="books">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LibraryModelStoreContainer">
+    <EntitySet Name="admin" EntityType="Self.admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="author" EntityType="Self.author" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="books" EntityType="Self.books" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__books__author_id__03F0984C" Association="Self.FK__books__author_id__03F0984C">
+      <End Role="author" EntitySet="author" />
+      <End Role="books" EntitySet="books" />
+    </AssociationSet>
+    <AssociationSet Name="FK__books__category___02FC7413" Association="Self.FK__books__category___02FC7413">
+      <End Role="category" EntitySet="category" />
+      <End Role="books" EntitySet="books" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
